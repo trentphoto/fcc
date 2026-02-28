@@ -93,6 +93,24 @@ function YouTubeIcon({ className }: { className?: string }) {
   );
 }
 
+function CapitolIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={24} height={24}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3.75a2.25 2.25 0 0 0-2.25 2.25v.75h4.5V6A2.25 2.25 0 0 0 12 3.75Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 9.75h13.5M6.75 9.75V15m3-5.25V15m3-5.25V15m3-5.25V15m-12 3h13.5M3.75 18h16.5" />
+    </svg>
+  );
+}
+
+function MonumentIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={24} height={24}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="m12 3.75 2.25 15h-4.5L12 3.75Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 20.25h9" />
+    </svg>
+  );
+}
+
 /* ─────────────── Navigation ─────────────── */
 
 function Navbar() {
@@ -223,6 +241,12 @@ function HeroSection() {
         <p className="text-accent-light text-sm sm:text-base font-semibold tracking-widest uppercase mb-4 sm:mb-6">
           Welcome Home
         </p>
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 mb-5">
+          <MapPinIcon className="w-4 h-4 text-accent-light" />
+          <span className="text-xs sm:text-sm text-white/85 font-medium tracking-wide">
+            Serving Northern Virginia &amp; the DMV
+          </span>
+        </div>
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight mb-6 sm:mb-8">
           Faith Community
           <br />
@@ -230,7 +254,8 @@ function HeroSection() {
         </h1>
         <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
           A place where everyone belongs. Come as you are and discover a
-          community built on faith, love, and genuine connection.
+          community built on faith, love, and genuine connection in Northern
+          Virginia.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
@@ -246,6 +271,13 @@ function HeroSection() {
             Learn More
           </a>
         </div>
+      </div>
+
+      {/* Subtle local-inspired line art */}
+      <div className="absolute bottom-0 left-0 right-0 opacity-35 pointer-events-none">
+        <svg viewBox="0 0 1440 140" className="w-full h-24 text-white/40" fill="none">
+          <path d="M0 115h340l40-26 50 26h210l30-74 30 74h155l25-52 25 52h535" stroke="currentColor" strokeWidth="2" />
+        </svg>
       </div>
 
       {/* Scroll Indicator */}
@@ -288,6 +320,10 @@ function WelcomeSection() {
                 <p className="text-text-muted/60 text-xs mt-1">
                   Recommended: 800x600px
                 </p>
+                <div className="flex items-center justify-center gap-3 mt-4 text-text-muted/70">
+                  <CapitolIcon className="w-4 h-4" />
+                  <MonumentIcon className="w-4 h-4" />
+                </div>
               </div>
             </div>
             {/* Decorative accent */}
@@ -308,7 +344,7 @@ function WelcomeSection() {
               Faith Community Church is a non-denominational church where people
               from all walks of life come together to worship, grow, and serve.
               Whether you&apos;re new to faith or have been walking with God for
-              years, there&apos;s a place for you here.
+              years, there&apos;s a place for you here in the DMV.
             </p>
             <p className="text-text-muted text-lg leading-relaxed mb-8">
               We believe church should feel like family — a safe space to ask
@@ -433,7 +469,12 @@ function VisitSection() {
               {
                 icon: <MapPinIcon className="w-6 h-6 text-primary" />,
                 title: "Location",
-                desc: "[Church Address — TBD]. Look for the signs and friendly faces ready to greet you!",
+                desc: "Northern Virginia (DMV area). Final address details are coming soon. Look for the signs and friendly faces ready to greet you!",
+              },
+              {
+                icon: <CapitolIcon className="w-6 h-6 text-primary" />,
+                title: "DMV Community",
+                desc: "We welcome neighbors from Northern Virginia, DC, and Maryland who are looking for authentic faith and community.",
               },
               {
                 icon: <UsersIcon className="w-6 h-6 text-primary" />,
@@ -621,7 +662,7 @@ function CommunitySection() {
             { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square" },
             { label: "Small Groups", size: "", aspect: "aspect-square" },
             { label: "Youth", size: "", aspect: "aspect-square" },
-            { label: "Outreach", size: "", aspect: "aspect-square" },
+            { label: "DMV Outreach", size: "", aspect: "aspect-square" },
             { label: "Fellowship", size: "", aspect: "aspect-square" },
           ].map((item, i) => (
             <div
@@ -660,7 +701,8 @@ function ConnectSection() {
         </h2>
         <p className="text-text-muted text-lg max-w-2xl mx-auto mb-10">
           Stay up to date with what&apos;s happening at FCC. Follow us on social
-          media for encouragement, event updates, and community highlights.
+          media for encouragement, event updates, and community highlights
+          across Northern Virginia and the greater DMV.
         </p>
 
         {/* Social Links */}
@@ -743,7 +785,8 @@ function Footer() {
               <span className="font-bold text-lg">Faith Community Church</span>
             </div>
             <p className="text-white/50 text-sm leading-relaxed">
-              A welcoming non-denominational church for everyone.
+              A welcoming non-denominational church serving Northern Virginia
+              and the DMV.
             </p>
           </div>
 
@@ -783,7 +826,7 @@ function Footer() {
               <p className="flex items-center gap-2">
                 <MapPinIcon className="w-4 h-4 text-white/30" />
                 {/* TODO: Replace with actual address */}
-                [Church Address TBD]
+                [Northern Virginia Campus Address TBD]
               </p>
               <p className="flex items-center gap-2">
                 <PhoneIcon className="w-4 h-4 text-white/30" />

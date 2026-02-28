@@ -10,7 +10,7 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "Faith Community Church | Welcome Home",
   description:
-    "Faith Community Church — a welcoming non-denominational church for everyone. Join us for worship, community, and faith.",
+    "Faith Community Church — a welcoming non-denominational church serving Northern Virginia and the DMV. Join us for worship, community, and faith.",
 };
 
 export default function RootLayout({
