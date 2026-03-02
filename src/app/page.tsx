@@ -132,13 +132,13 @@ function Navbar() {
           {/* Logo / Name */}
           <a href="#" className="flex items-center gap-2">
             <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm">
-              FCC
+              MC
             </div>
             <span className="text-lg font-bold text-primary-dark tracking-tight hidden sm:inline">
-              Faith Community Church
+              Mission Church
             </span>
             <span className="text-lg font-bold text-primary-dark tracking-tight sm:hidden">
-              FCC
+              MC
             </span>
           </a>
 
@@ -222,18 +222,16 @@ function Navbar() {
 
 function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Background Image Placeholder */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-primary-light">
-        {/* 
-          TODO: Replace this div with your hero image.
-          Recommended: A warm photo of your congregation, worship, or church building.
-          Use Next.js Image component:
-          <Image src="/images/hero.jpg" alt="Church community" fill className="object-cover" priority />
-          Then add an overlay div on top for readability.
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-24">
+      {/* Background */}
+      <div className="absolute inset-0 bg-linear-to-br from-primary-dark via-primary to-primary-light">
+        {/*
+          TODO: Replace the placeholder below with a fullscreen hero video:
+          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
+            <source src="/videos/hero.mp4" type="video/mp4" />
+          </video>
         */}
-        <div className="absolute inset-0 bg-[url('/images/hero-placeholder.jpg')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-primary/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary-dark/80 via-primary/40 to-transparent" />
       </div>
 
       {/* Content */}
@@ -248,7 +246,7 @@ function HeroSection() {
           </span>
         </div>
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight mb-6 sm:mb-8">
-          Faith Community
+          Mission
           <br />
           <span className="text-accent-light">Church</span>
         </h1>
@@ -270,6 +268,25 @@ function HeroSection() {
           >
             Learn More
           </a>
+        </div>
+
+        {/* Video Placeholder — replace with <video> or embed */}
+        <div className="mt-10 w-full max-w-2xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-white/5 aspect-video flex items-center justify-center group cursor-pointer hover:bg-white/10 transition-all shadow-2xl">
+            <div className="absolute inset-0 bg-linear-to-br from-primary-dark/50 to-primary/30" />
+            <div className="relative z-10 flex flex-col items-center gap-3">
+              <div className="w-16 h-16 rounded-full bg-white/20 border-2 border-white/60 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/30 transition-all duration-300">
+                <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <p className="text-white/80 text-sm font-medium tracking-wide">Watch Our Story</p>
+            </div>
+            {/* Corner label */}
+            <span className="absolute top-3 right-3 text-[10px] font-semibold uppercase tracking-widest text-white/40 bg-white/10 rounded px-2 py-0.5">
+              Video Placeholder
+            </span>
+          </div>
         </div>
       </div>
 
@@ -341,7 +358,7 @@ function WelcomeSection() {
               <span className="text-primary">just as you are.</span>
             </h2>
             <p className="text-text-muted text-lg leading-relaxed mb-6">
-              Faith Community Church is a non-denominational church where people
+              Mission Church is a non-denominational church where people
               from all walks of life come together to worship, grow, and serve.
               Whether you&apos;re new to faith or have been walking with God for
               years, there&apos;s a place for you here in the DMV.
@@ -400,7 +417,7 @@ function VisionSection() {
             &rdquo;
           </blockquote>
           <p className="text-text-muted text-sm mt-6">
-            — Faith Community Church Vision Statement
+            — Mission Church Vision Statement
           </p>
         </div>
 
@@ -649,7 +666,7 @@ function CommunitySection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-primary font-semibold text-sm tracking-widest uppercase mb-3">
-            Life at FCC
+            Life at Mission Church
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight">
             A Place to Belong
@@ -700,7 +717,7 @@ function ConnectSection() {
           Follow Along With Us
         </h2>
         <p className="text-text-muted text-lg max-w-2xl mx-auto mb-10">
-          Stay up to date with what&apos;s happening at FCC. Follow us on social
+          Stay up to date with what&apos;s happening at Mission Church. Follow us on social
           media for encouragement, event updates, and community highlights
           across Northern Virginia and the greater DMV.
         </p>
@@ -746,9 +763,9 @@ function ConnectSection() {
           <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6">
             {/* 
               TODO: Replace with church logo
-              <Image src="/images/logo.png" alt="FCC Logo" width={48} height={48} />
+              <Image src="/images/logo.png" alt="Mission Church Logo" width={48} height={48} />
             */}
-            <span className="text-2xl font-bold">FCC</span>
+            <span className="text-2xl font-bold">MC</span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-bold mb-3">
             We Can&apos;t Wait to Meet You
@@ -780,9 +797,9 @@ function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs">
-                FCC
+                MC
               </div>
-              <span className="font-bold text-lg">Faith Community Church</span>
+              <span className="font-bold text-lg">Mission Church</span>
             </div>
             <p className="text-white/50 text-sm leading-relaxed">
               A welcoming non-denominational church serving Northern Virginia
@@ -855,7 +872,7 @@ function Footer() {
 
         <div className="border-t border-white/10 pt-8 text-center">
           <p className="text-white/30 text-sm">
-            &copy; {new Date().getFullYear()} Faith Community Church. All rights
+            &copy; {new Date().getFullYear()} Mission Church. All rights
             reserved.
           </p>
         </div>
