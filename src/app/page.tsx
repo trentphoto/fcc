@@ -135,7 +135,7 @@ function Navbar() {
               MC
             </div>
             <span className="text-lg font-bold text-primary-dark tracking-tight hidden sm:inline">
-              Mission Church
+              The Mission Church
             </span>
             <span className="text-lg font-bold text-primary-dark tracking-tight sm:hidden">
               MC
@@ -358,7 +358,7 @@ function WelcomeSection() {
               <span className="text-primary">just as you are.</span>
             </h2>
             <p className="text-text-muted text-lg leading-relaxed mb-6">
-              Mission Church is a non-denominational church where people
+              The Mission Church is a non-denominational church where people
               from all walks of life come together to worship, grow, and serve.
               Whether you&apos;re new to faith or have been walking with God for
               years, there&apos;s a place for you here in the DMV.
@@ -417,7 +417,7 @@ function VisionSection() {
             &rdquo;
           </blockquote>
           <p className="text-text-muted text-sm mt-6">
-            — Mission Church Vision Statement
+            — The Mission Church Vision Statement
           </p>
         </div>
 
@@ -666,7 +666,7 @@ function CommunitySection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-primary font-semibold text-sm tracking-widest uppercase mb-3">
-            Life at Mission Church
+            Life at The Mission Church
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight">
             A Place to Belong
@@ -717,7 +717,7 @@ function ConnectSection() {
           Follow Along With Us
         </h2>
         <p className="text-text-muted text-lg max-w-2xl mx-auto mb-10">
-          Stay up to date with what&apos;s happening at Mission Church. Follow us on social
+          Stay up to date with what&apos;s happening at The Mission Church. Follow us on social
           media for encouragement, event updates, and community highlights
           across Northern Virginia and the greater DMV.
         </p>
@@ -763,7 +763,7 @@ function ConnectSection() {
           <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6">
             {/* 
               TODO: Replace with church logo
-              <Image src="/images/logo.png" alt="Mission Church Logo" width={48} height={48} />
+              <Image src="/images/logo.png" alt="The Mission Church Logo" width={48} height={48} />
             */}
             <span className="text-2xl font-bold">MC</span>
           </div>
@@ -799,7 +799,7 @@ function Footer() {
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs">
                 MC
               </div>
-              <span className="font-bold text-lg">Mission Church</span>
+              <span className="font-bold text-lg">The Mission Church</span>
             </div>
             <p className="text-white/50 text-sm leading-relaxed">
               A welcoming non-denominational church serving Northern Virginia
@@ -872,7 +872,7 @@ function Footer() {
 
         <div className="border-t border-white/10 pt-8 text-center">
           <p className="text-white/30 text-sm">
-            &copy; {new Date().getFullYear()} Mission Church. All rights
+            &copy; {new Date().getFullYear()} The Mission Church. All rights
             reserved.
           </p>
         </div>

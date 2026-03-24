@@ -8,9 +8,9 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Mission Church | Welcome Home",
+  title: "The Mission Church | Welcome Home",
   description:
-    "Mission Church — a welcoming non-denominational church serving Northern Virginia and the DMV. Join us for worship, community, and faith.",
+    "The Mission Church — a welcoming non-denominational church serving Northern Virginia and the DMV. Join us for worship, community, and faith.",
 };
 
 export default function RootLayout({
