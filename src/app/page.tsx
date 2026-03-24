@@ -224,14 +224,9 @@ function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-24">
       {/* Background */}
-      <div className="absolute inset-0 bg-linear-to-br from-primary-dark via-primary to-primary-light">
-        {/*
-          TODO: Replace the placeholder below with a fullscreen hero video:
-          <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
-            <source src="/videos/hero.mp4" type="video/mp4" />
-          </video>
-        */}
-        <div className="absolute inset-0 bg-linear-to-t from-primary-dark/80 via-primary/40 to-transparent" />
+      <div className="absolute inset-0">
+        <img src="/images/hero.jpg" alt="The Mission Church community" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary-dark/80 via-primary-dark/50 to-primary-dark/30" />
       </div>
 
       {/* Content */}
@@ -246,14 +241,13 @@ function HeroSection() {
           </span>
         </div>
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight mb-6 sm:mb-8">
-          Mission
+          Called to Love.
           <br />
-          <span className="text-accent-light">Church</span>
+          <span className="text-accent-light">Sent to Serve.</span>
         </h1>
         <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-          A place where everyone belongs. Come as you are and discover a
-          community built on faith, love, and genuine connection in Northern
-          Virginia.
+          The Mission Church — a community rooted in faith, united in love,
+          and sent to make a difference in Northern Virginia and beyond.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
@@ -320,28 +314,10 @@ function WelcomeSection() {
     <section id="welcome" className="py-20 sm:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image Placeholder */}
+          {/* Community Photo */}
           <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-warm-bg to-warm-bg-alt border-2 border-dashed border-accent/40 flex items-center justify-center">
-              {/* 
-                TODO: Replace with a warm, welcoming photo of your community.
-                <Image src="/images/welcome.jpg" alt="Our community" fill className="object-cover rounded-2xl" />
-              */}
-              <div className="text-center p-8">
-                <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
-                  <UsersIcon className="w-8 h-8 text-accent" />
-                </div>
-                <p className="text-text-muted text-sm font-medium">
-                  Community Photo Placeholder
-                </p>
-                <p className="text-text-muted/60 text-xs mt-1">
-                  Recommended: 800x600px
-                </p>
-                <div className="flex items-center justify-center gap-3 mt-4 text-text-muted/70">
-                  <CapitolIcon className="w-4 h-4" />
-                  <MonumentIcon className="w-4 h-4" />
-                </div>
-              </div>
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+              <img src="/images/home1.jpg" alt="Our community" className="w-full h-full object-cover" />
             </div>
             {/* Decorative accent */}
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-accent/10 rounded-2xl -z-10" />
@@ -353,20 +329,20 @@ function WelcomeSection() {
               Who We Are
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 leading-tight">
-              You&apos;re welcome here,
+              A home to belong.
               <br />
-              <span className="text-primary">just as you are.</span>
+              <span className="text-primary">A mission to live.</span>
             </h2>
             <p className="text-text-muted text-lg leading-relaxed mb-6">
-              The Mission Church is a non-denominational church where people
-              from all walks of life come together to worship, grow, and serve.
-              Whether you&apos;re new to faith or have been walking with God for
-              years, there&apos;s a place for you here in the DMV.
+              The Mission Church is a non-denominational community where people
+              from all walks of life come together to worship, grow, and go.
+              We gather to be transformed — and then we go out to transform
+              our neighborhoods, our city, and beyond.
             </p>
             <p className="text-text-muted text-lg leading-relaxed mb-8">
-              We believe church should feel like family — a safe space to ask
-              questions, find support, and experience God&apos;s love in a real,
-              tangible way.
+              Whether you&apos;re new to faith or have been walking with God for
+              years, there&apos;s a place for you here in the DMV — and a
+              purpose waiting for you.
             </p>
             <a
               href="#visit"
@@ -390,11 +366,31 @@ function WelcomeSection() {
   );
 }
 
+/* ─────────────── Full-Bleed Mission Statement ─────────────── */
+
+function MissionBanner() {
+  return (
+    <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-dark to-primary">
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+        <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight">
+          We don&apos;t just gather.
+          <br />
+          <span className="text-accent-light">We go.</span>
+        </h2>
+        <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mt-6 leading-relaxed">
+          Built for community. Driven by mission. Serving Northern Virginia
+          and the DMV — and everywhere God sends us.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────── Vision Section ─────────────── */
 
 function VisionSection() {
   return (
-    <section id="vision" className="py-20 sm:py-28 bg-warm-bg">
+    <section id="vision" className="py-20 sm:py-28 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
           <SparklesIcon className="w-8 h-8 text-primary" />
@@ -433,8 +429,8 @@ function VisionSection() {
               desc: "Real relationships built on love, trust, and mutual support.",
             },
             {
-              title: "Service",
-              desc: "Making a difference in our neighborhood and beyond.",
+              title: "Mission",
+              desc: "Sent to serve — making a difference in our neighborhood and beyond.",
             },
           ].map((value) => (
             <div
@@ -506,7 +502,7 @@ function VisitSection() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="flex gap-4 p-5 rounded-xl hover:bg-warm-bg transition-colors"
+                className="flex gap-4 p-5 rounded-xl hover:bg-gray-50 transition-colors"
               >
                 <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                   {item.icon}
@@ -523,24 +519,10 @@ function VisitSection() {
             ))}
           </div>
 
-          {/* Image Placeholder */}
+          {/* Church Photo */}
           <div className="relative">
-            <div className="aspect-[3/4] rounded-2xl bg-gradient-to-br from-warm-bg to-warm-bg-alt border-2 border-dashed border-accent/40 flex items-center justify-center">
-              {/* 
-                TODO: Replace with a photo of your church building or worship service.
-                <Image src="/images/visit.jpg" alt="Our church" fill className="object-cover rounded-2xl" />
-              */}
-              <div className="text-center p-8">
-                <div className="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
-                  <MapPinIcon className="w-8 h-8 text-accent" />
-                </div>
-                <p className="text-text-muted text-sm font-medium">
-                  Church / Worship Photo
-                </p>
-                <p className="text-text-muted/60 text-xs mt-1">
-                  Recommended: 600x800px
-                </p>
-              </div>
+            <div className="aspect-[3/4] rounded-2xl overflow-hidden">
+              <img src="/images/home1.jpg" alt="Our church community" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/5 rounded-2xl -z-10" />
           </div>
@@ -631,7 +613,7 @@ function PrayerSection() {
 
 function DonateSection() {
   return (
-    <section id="donate" className="py-20 sm:py-28 bg-warm-bg-alt">
+    <section id="donate" className="py-20 sm:py-28 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl p-8 sm:p-12 border border-accent/20 shadow-sm text-center">
           <p className="text-primary font-semibold text-sm tracking-widest uppercase mb-3">
@@ -662,7 +644,7 @@ function DonateSection() {
 
 function CommunitySection() {
   return (
-    <section className="py-20 sm:py-28 bg-warm-bg">
+    <section className="py-20 sm:py-28 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-primary font-semibold text-sm tracking-widest uppercase mb-3">
@@ -673,28 +655,22 @@ function CommunitySection() {
           </h2>
         </div>
 
-        {/* Photo Grid Placeholders */}
+        {/* Photo Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square" },
-            { label: "Small Groups", size: "", aspect: "aspect-square" },
-            { label: "Youth", size: "", aspect: "aspect-square" },
-            { label: "DMV Outreach", size: "", aspect: "aspect-square" },
-            { label: "Fellowship", size: "", aspect: "aspect-square" },
+            { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square", img: "/images/hero.jpg" },
+            { label: "Small Groups", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
+            { label: "Youth", size: "", aspect: "aspect-square", img: "/images/hero.jpg" },
+            { label: "DMV Outreach", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
+            { label: "Fellowship", size: "", aspect: "aspect-square", img: "/images/hero.jpg" },
           ].map((item, i) => (
             <div
               key={i}
-              className={`${item.size} ${item.aspect} rounded-2xl bg-gradient-to-br from-white to-warm-bg-alt border-2 border-dashed border-accent/30 flex items-center justify-center hover:border-primary/30 transition-colors`}
+              className={`${item.size} ${item.aspect} rounded-2xl overflow-hidden relative group`}
             >
-              {/* 
-                TODO: Replace with actual community photos.
-                <Image src={`/images/community-${i+1}.jpg`} alt={item.label} fill className="object-cover rounded-2xl" />
-              */}
-              <div className="text-center p-4">
-                <p className="text-text-muted text-sm font-medium">
-                  {item.label}
-                </p>
-                <p className="text-text-muted/50 text-xs mt-1">Photo</p>
+              <img src={item.img} alt={item.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-primary-dark/30 group-hover:bg-primary-dark/40 transition-colors flex items-end p-4">
+                <p className="text-white text-sm font-semibold">{item.label}</p>
               </div>
             </div>
           ))}
@@ -889,6 +865,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <WelcomeSection />
+      <MissionBanner />
       <VisionSection />
       <VisitSection />
       <PrayerSection />
