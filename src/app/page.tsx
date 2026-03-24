@@ -131,14 +131,14 @@ function Navbar() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo / Name */}
           <a href="#" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm">
-              MC
+            <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs">
+              TMC
             </div>
             <span className="text-lg font-bold text-primary-dark tracking-tight hidden sm:inline">
               The Mission Church
             </span>
             <span className="text-lg font-bold text-primary-dark tracking-tight sm:hidden">
-              MC
+              TMC
             </span>
           </a>
 
@@ -741,7 +741,7 @@ function ConnectSection() {
               TODO: Replace with church logo
               <Image src="/images/logo.png" alt="The Mission Church Logo" width={48} height={48} />
             */}
-            <span className="text-2xl font-bold">MC</span>
+            <span className="text-2xl font-bold">TMC</span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-bold mb-3">
             We Can&apos;t Wait to Meet You
@@ -772,8 +772,8 @@ function Footer() {
           {/* Church Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs">
-                MC
+              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-[0.65rem] leading-none">
+                TMC
               </div>
               <span className="font-bold text-lg">The Mission Church</span>
             </div>
