@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /* ─────────────── Icon Components ─────────────── */
 
@@ -111,6 +111,38 @@ function MonumentIcon({ className }: { className?: string }) {
   );
 }
 
+/* ─────────────── Live Banner ─────────────── */
+
+function LiveBanner() {
+  const [liveData, setLiveData] = useState<{ is_live: boolean; zoom_link: string } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/live-status")
+      .then((res) => res.json())
+      .then((data) => setLiveData(data))
+      .catch(() => {});
+  }, []);
+
+  if (!liveData?.is_live) return null;
+
+  return (
+    <div className="bg-primary-dark text-white text-center text-sm py-2 px-4">
+      <a
+        href={liveData.zoom_link || "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 font-medium hover:underline"
+      >
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
+        </span>
+        We Are Live — Join Now
+      </a>
+    </div>
+  );
+}
+
 /* ─────────────── Navigation ─────────────── */
 
 function Navbar() {
@@ -126,7 +158,9 @@ function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50">
+      <LiveBanner />
+      <div className="bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo / Name */}
@@ -213,6 +247,7 @@ function Navbar() {
             </div>
           </div>
         )}
+      </div>
       </div>
     </nav>
   );
@@ -334,15 +369,24 @@ function WelcomeSection() {
               <span className="text-primary">A mission to live.</span>
             </h2>
             <p className="text-text-muted text-lg leading-relaxed mb-6">
-              The Mission Church is a non-denominational community where people
-              from all walks of life come together to worship, grow, and go.
-              We gather to be transformed — and then we go out to transform
-              our neighborhoods, our city, and beyond.
+              The Mission Church started with a simple conviction: the church
+              isn&apos;t a building — it&apos;s a people on a mission. What began as
+              a small group of families gathering in Northern Virginia has grown
+              into a vibrant, multi-generational community united by one calling —
+              to love God, love people, and make disciples wherever we go.
+            </p>
+            <p className="text-text-muted text-lg leading-relaxed mb-6">
+              We&apos;re a non-denominational church where people from every
+              background and season of life come together to worship, grow, and
+              serve. We believe the gospel changes everything — how we treat our
+              neighbors, how we raise our families, and how we show up in our
+              city. Every week we gather to be transformed, and then we go out
+              to be the hands and feet of Jesus in the DMV and beyond.
             </p>
             <p className="text-text-muted text-lg leading-relaxed mb-8">
-              Whether you&apos;re new to faith or have been walking with God for
-              years, there&apos;s a place for you here in the DMV — and a
-              purpose waiting for you.
+              Whether you&apos;re exploring faith for the first time or you&apos;ve
+              been following Jesus for decades, there&apos;s a seat at the table
+              for you here — and a mission waiting for you.
             </p>
             <a
               href="#visit"
