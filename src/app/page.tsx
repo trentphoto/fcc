@@ -566,7 +566,7 @@ function VisitSection() {
           {/* Church Photo */}
           <div className="relative">
             <div className="aspect-[3/4] rounded-2xl overflow-hidden">
-              <img src="/images/home1.jpg" alt="Our church community" className="w-full h-full object-cover" />
+              <img src="/images/home2.jpg" alt="Our church community" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/5 rounded-2xl -z-10" />
           </div>
@@ -702,7 +702,7 @@ function CommunitySection() {
         {/* Photo Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square", img: "/images/hero.jpg" },
+            { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square", img: "/images/home2.jpg" },
             { label: "Small Groups", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
             { label: "Youth", size: "", aspect: "aspect-square", img: "/images/hero.jpg" },
             { label: "DMV Outreach", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
