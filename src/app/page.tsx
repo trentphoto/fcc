@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 
 /* ─────────────── Icon Components ─────────────── */
 
@@ -299,24 +299,6 @@ function HeroSection() {
           </a>
         </div>
 
-        {/* Video Placeholder — replace with <video> or embed */}
-        <div className="mt-10 w-full max-w-2xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-white/5 aspect-video flex items-center justify-center group cursor-pointer hover:bg-white/10 transition-all shadow-2xl">
-            <div className="absolute inset-0 bg-linear-to-br from-primary-dark/50 to-primary/30" />
-            <div className="relative z-10 flex flex-col items-center gap-3">
-              <div className="w-16 h-16 rounded-full bg-white/20 border-2 border-white/60 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/30 transition-all duration-300">
-                <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-              <p className="text-white/80 text-sm font-medium tracking-wide">Watch Our Story</p>
-            </div>
-            {/* Corner label */}
-            <span className="absolute top-3 right-3 text-[10px] font-semibold uppercase tracking-widest text-white/40 bg-white/10 rounded px-2 py-0.5">
-              Video Placeholder
-            </span>
-          </div>
-        </div>
       </div>
 
       {/* Subtle local-inspired line art */}
@@ -446,15 +428,9 @@ function VisionSection() {
           Where We&apos;re Going
         </h2>
 
-        {/* Vision Statement Placeholder */}
         <div className="bg-white rounded-2xl p-8 sm:p-12 shadow-sm border border-accent/20">
           <blockquote className="text-xl sm:text-2xl text-foreground/80 leading-relaxed italic">
-            &ldquo;
-            {/* TODO: Replace with your actual vision statement */}
-            <span className="text-primary font-medium not-italic">
-              [Your Vision Statement Here]
-            </span>
-            &rdquo;
+            &ldquo;A Church on Mission for Christ &mdash; reaching every corner of the DMV.&rdquo;
           </blockquote>
           <p className="text-text-muted text-sm mt-6">
             — The Mission Church Vision Statement
@@ -578,6 +554,151 @@ function VisitSection() {
 
 /* ─────────────── Prayer Section ─────────────── */
 
+function PrayerRequestForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [request, setRequest] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setErrorMessage("");
+    setStatus("submitting");
+    try {
+      const res = await fetch("/api/prayer-requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, request }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setErrorMessage(typeof data.error === "string" ? data.error : "Something went wrong.");
+        setStatus("error");
+        return;
+      }
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setRequest("");
+    } catch {
+      setErrorMessage("Could not reach the server. Please try again.");
+      setStatus("error");
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-left">
+        <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center mb-4">
+          <HeartIcon className="w-7 h-7 text-accent-light" />
+        </div>
+        <h3 className="text-xl font-bold mb-2">Thank you</h3>
+        <p className="text-white/70 text-sm leading-relaxed">
+          Your prayer request was received. Our team will pray for you.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-6 text-accent-light font-semibold text-sm hover:text-white transition-colors"
+        >
+          Submit another request
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-left"
+    >
+      <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center mx-auto sm:mx-0 mb-4">
+        <HeartIcon className="w-7 h-7 text-accent-light" />
+      </div>
+      <h3 className="text-xl font-bold mb-1 text-center sm:text-left">Submit a Prayer Request</h3>
+      <p className="text-white/60 text-sm leading-relaxed mb-6">
+        Share as much or as little as you&apos;re comfortable with. Optional contact info helps us follow up only if you want that.
+      </p>
+
+      <div className="space-y-4">
+        <div>
+          <label htmlFor="prayer-name" className="block text-xs font-medium text-white/60 mb-1.5">
+            Name <span className="text-white/40">(optional)</span>
+          </label>
+          <input
+            id="prayer-name"
+            type="text"
+            autoComplete="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full rounded-lg bg-white/10 border border-white/20 px-3 py-2.5 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-accent-light/50"
+            placeholder="Your name"
+          />
+        </div>
+        <div>
+          <label htmlFor="prayer-email" className="block text-xs font-medium text-white/60 mb-1.5">
+            Email <span className="text-white/40">(optional)</span>
+          </label>
+          <input
+            id="prayer-email"
+            type="email"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full rounded-lg bg-white/10 border border-white/20 px-3 py-2.5 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-accent-light/50"
+            placeholder="you@example.com"
+          />
+        </div>
+        <div>
+          <label htmlFor="prayer-phone" className="block text-xs font-medium text-white/60 mb-1.5">
+            Phone <span className="text-white/40">(optional)</span>
+          </label>
+          <input
+            id="prayer-phone"
+            type="tel"
+            autoComplete="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="w-full rounded-lg bg-white/10 border border-white/20 px-3 py-2.5 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-accent-light/50"
+            placeholder="(555) 555-5555"
+          />
+        </div>
+        <div>
+          <label htmlFor="prayer-request" className="block text-xs font-medium text-white/60 mb-1.5">
+            How can we pray for you? <span className="text-accent-light">*</span>
+          </label>
+          <textarea
+            id="prayer-request"
+            required
+            rows={4}
+            value={request}
+            onChange={(e) => setRequest(e.target.value)}
+            className="w-full rounded-lg bg-white/10 border border-white/20 px-3 py-2.5 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-accent-light/50 resize-y min-h-[100px]"
+            placeholder="Your prayer request…"
+          />
+        </div>
+      </div>
+
+      {errorMessage && (
+        <p className="mt-4 text-sm text-red-300" role="alert">
+          {errorMessage}
+        </p>
+      )}
+
+      <button
+        type="submit"
+        disabled={status === "submitting"}
+        className="mt-6 w-full inline-flex items-center justify-center gap-2 bg-accent-light text-primary-dark px-5 py-3 rounded-full text-sm font-semibold hover:bg-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {status === "submitting" ? "Sending…" : "Send prayer request"}
+      </button>
+    </form>
+  );
+}
+
 function PrayerSection() {
   return (
     <section id="prayer" className="py-20 sm:py-28 bg-primary-dark text-white relative overflow-hidden">
@@ -602,50 +723,28 @@ function PrayerSection() {
           prayer.
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          {/* Prayer Request Link */}
-          <a
-            href="#"
-            /* TODO: Replace href with your prayer request form link (e.g., Google Form, Typeform, etc.) */
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/20 transition-all hover:scale-[1.02]"
-          >
-            <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <HeartIcon className="w-7 h-7 text-accent-light" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Submit a Prayer Request</h3>
-            <p className="text-white/60 text-sm leading-relaxed">
-              Fill out our confidential prayer request form and our prayer team
-              will begin praying for you.
-            </p>
-            <span className="inline-flex items-center gap-1 text-accent-light font-semibold text-sm mt-4 group-hover:gap-2 transition-all">
-              Submit Request
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-              </svg>
-            </span>
-          </a>
+        <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto text-left">
+          <PrayerRequestForm />
 
           {/* Prayer Line */}
-          <div className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/20 transition-all">
+          <div className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 hover:bg-white/20 transition-all h-fit">
             <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <PhoneIcon className="w-7 h-7 text-accent-light" />
             </div>
-            <h3 className="text-xl font-bold mb-2">Call Our Prayer Line</h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-4">
+            <h3 className="text-xl font-bold mb-2 text-center">Call Our Prayer Line</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-4 text-center">
               Speak directly with someone who cares. Our prayer line is
               available for you.
             </p>
             {/* TODO: Replace with actual prayer line phone number */}
             <a
               href="tel:+10000000000"
-              className="inline-flex items-center gap-2 text-accent-light font-bold text-lg hover:text-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 w-full text-accent-light font-bold text-lg hover:text-white transition-colors"
             >
               <PhoneIcon className="w-5 h-5" />
               (000) 000-0000
             </a>
-            <p className="text-white/40 text-xs mt-2">[Phone Number TBD]</p>
+            <p className="text-white/40 text-xs mt-2 text-center">[Phone Number TBD]</p>
           </div>
         </div>
       </div>
