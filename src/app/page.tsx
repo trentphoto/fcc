@@ -138,18 +138,16 @@ function Navbar() {
       <LiveBanner />
       <div className="bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo / Name */}
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs">
-              TMC
-            </div>
-            <span className="text-lg font-bold text-primary-dark tracking-tight hidden sm:inline">
-              The Mission Church
-            </span>
-            <span className="text-lg font-bold text-primary-dark tracking-tight sm:hidden">
-              TMC
-            </span>
+        <div className="flex items-center justify-between h-20 sm:h-24">
+          {/* Logo: horizontal lockup */}
+          <a href="#" className="flex items-center shrink-0 min-w-0">
+            <img
+              src="/logo/logo-horizontal-colored.svg"
+              alt="The Mission Church"
+              className="h-14 sm:h-16 md:h-17 w-auto max-w-[min(100%,min(92vw,36rem))] object-contain object-left"
+              width={870}
+              height={318}
+            />
           </a>
 
           {/* Desktop Links */}
@@ -158,7 +156,7 @@ function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
+                className="text-base font-medium text-gray-600 hover:text-primary transition-colors"
               >
                 {link.label}
               </a>
@@ -167,15 +165,15 @@ function Navbar() {
               href={paypalHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-primary text-primary px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 border border-primary text-primary px-6 py-3 rounded-full text-base font-semibold hover:bg-primary hover:text-white transition-colors"
             >
               Donate
             </a>
             <a
               href="#prayer"
-              className="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-primary-dark transition-colors shadow-sm"
             >
-              <HeartIcon className="w-4 h-4" />
+              <HeartIcon className="w-5 h-5" />
               Prayer Request
             </a>
           </div>
@@ -199,7 +197,7 @@ function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="px-3 py-2.5 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
+                  className="px-3 py-2.5 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
                 >
                   {link.label}
                 </a>
@@ -208,16 +206,16 @@ function Navbar() {
                 href={paypalHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mx-3 mt-2 inline-flex items-center justify-center gap-2 border border-primary text-primary px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary hover:text-white transition-colors"
+                className="mx-3 mt-2 inline-flex items-center justify-center gap-2 border border-primary text-primary px-5 py-3 rounded-full text-base font-semibold hover:bg-primary hover:text-white transition-colors"
               >
                 Donate
               </a>
               <a
                 href="#prayer"
                 onClick={() => setMobileOpen(false)}
-                className="mx-3 mt-2 inline-flex items-center justify-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-dark transition-colors"
+                className="mx-3 mt-2 inline-flex items-center justify-center gap-2 bg-primary text-white px-5 py-3 rounded-full text-base font-semibold hover:bg-primary-dark transition-colors"
               >
-                <HeartIcon className="w-4 h-4" />
+                <HeartIcon className="w-5 h-5" />
                 Prayer Request
               </a>
             </div>
@@ -813,12 +811,14 @@ function ConnectSection() {
         {/* CTA Banner */}
         <div className="bg-gradient-to-r from-primary to-primary-light rounded-2xl p-8 sm:p-12 text-white">
           {/* Image placeholder */}
-          <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6">
-            {/* 
-              TODO: Replace with church logo
-              <Image src="/images/logo.png" alt="The Mission Church Logo" width={48} height={48} />
-            */}
-            <span className="text-2xl font-bold">TMC</span>
+          <div className="mx-auto mb-6 flex justify-center">
+            <img
+              src="/logo/logo-white.svg"
+              alt="The Mission Church"
+              className="h-24 sm:h-28 w-auto max-w-[min(100%,24rem)] object-contain"
+              width={444}
+              height={437}
+            />
           </div>
           <h3 className="text-2xl sm:text-3xl font-bold mb-3">
             We Can&apos;t Wait to Meet You
@@ -848,13 +848,16 @@ function Footer() {
         <div className="grid sm:grid-cols-3 gap-8 mb-8">
           {/* Church Info */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-[0.65rem] leading-none">
-                TMC
-              </div>
-              <span className="font-bold text-lg">The Mission Church</span>
+            <div className="mb-5">
+              <img
+                src="/logo/logo-white.svg"
+                alt="The Mission Church"
+                className="h-16 sm:h-20 md:h-24 w-auto max-w-[min(100%,26rem)] object-contain object-left"
+                width={444}
+                height={437}
+              />
             </div>
-            <p className="text-white/50 text-sm leading-relaxed">
+            <p className="text-white/50 text-base leading-relaxed">
               A welcoming non-denominational church serving Northern Virginia
               and the DMV.
             </p>
