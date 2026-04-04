@@ -3,6 +3,10 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { submitNetlifyForm } from "@/lib/netlify-forms";
 
+/** Google Form — stay connected (serve, life groups, availability, prayer). */
+const STAY_CONNECTED_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdaEes6DcdpgcuX79IVHvtzyikxbTJdbQgU3FkhuJNP8dy5Rg/viewform";
+
 /* ─────────────── Icon Components ─────────────── */
 
 function MenuIcon({ className }: { className?: string }) {
@@ -145,6 +149,7 @@ function Navbar() {
     { label: "Welcome", href: "#welcome" },
     { label: "Vision", href: "#vision" },
     { label: "Visit", href: "#visit" },
+    { label: "Get connected", href: "#stay-connected" },
     { label: "Prayer", href: "#prayer" },
     { label: "Connect", href: "#connect" },
   ];
@@ -829,6 +834,40 @@ function CommunitySection() {
   );
 }
 
+/* ─────────────── Stay connected (Google Form CTA) ─────────────── */
+
+function StayConnectedCtaSection() {
+  return (
+    <section id="stay-connected" className="py-20 sm:py-28 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-linear-to-r from-primary to-primary-light rounded-2xl p-8 sm:p-12 text-white text-center shadow-lg">
+          <p className="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3">
+            Welcome to The Mission Church
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight">
+            We&apos;d Love to Stay Connected With You
+          </h2>
+          <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+            Share your contact info, how you&apos;d like to get involved (serve, life groups, sports,
+            young adults), when you&apos;re typically available, and how we can pray for you.
+          </p>
+          <a
+            href={STAY_CONNECTED_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-white text-primary-dark px-8 py-3.5 rounded-full font-semibold hover:bg-accent-light transition-colors shadow-lg"
+          >
+            Open connection form
+          </a>
+          <p className="mt-4 text-sm text-white/55">
+            Opens a short Google Form in a new tab
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────── Connect / Social Section ─────────────── */
 
 function ConnectSection() {
@@ -1037,8 +1076,14 @@ function Footer() {
                 { label: "Welcome", href: "#welcome" },
                 { label: "Our Vision", href: "#vision" },
                 { label: "Plan Your Visit", href: "#visit" },
+                { label: "Get connected", href: "#stay-connected" },
                 { label: "Prayer Request", href: "#prayer" },
                 { label: "Contact", href: "#contact" },
+                {
+                  label: "Connection form",
+                  href: STAY_CONNECTED_FORM_URL,
+                  external: true,
+                },
                 { label: "Donate", href: "https://paypal.com", external: true },
               ].map((link) => (
                 <li key={link.href}>
@@ -1101,6 +1146,7 @@ export default function Home() {
       <PrayerSection />
       <DonateSection />
       <CommunitySection />
+      <StayConnectedCtaSection />
       <ConnectSection />
       <Footer />
     </>
