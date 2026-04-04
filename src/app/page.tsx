@@ -249,8 +249,10 @@ function HeroSection() {
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-24">
       {/* Background */}
       <div className="absolute inset-0">
-        <img src="/images/hero.jpg" alt="The Mission Church community" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-linear-to-t from-primary-dark/80 via-primary-dark/50 to-primary-dark/30" />
+        <img src="/images/worship.jpeg" alt="The Mission Church community" className="absolute inset-0 w-full h-full object-cover" />
+        {/* Base blue wash + stronger gradient for legibility on busier photos */}
+        <div className="absolute inset-0 bg-primary/35" />
+        <div className="absolute inset-0 bg-linear-to-t from-primary-dark/92 via-primary-dark/72 to-primary-dark/55" />
       </div>
 
       {/* Content */}
@@ -323,7 +325,7 @@ function WelcomeSection() {
           {/* Community Photo */}
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-              <img src="/images/home1.jpg" alt="Our community" className="w-full h-full object-cover" />
+              <img src="/images/life-group.jpeg" alt="Our community" className="w-full h-full object-cover" />
             </div>
             {/* Decorative accent */}
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-accent/10 rounded-2xl -z-10" />
@@ -536,7 +538,7 @@ function VisitSection() {
           {/* Church Photo */}
           <div className="relative">
             <div className="aspect-[3/4] rounded-2xl overflow-hidden">
-              <img src="/images/home2.jpg" alt="Our church community" className="w-full h-full object-cover" />
+              <img src="/images/outreach.jpeg" alt="Our church community" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/5 rounded-2xl -z-10" />
           </div>
@@ -787,11 +789,11 @@ function CommunitySection() {
         {/* Photo Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square", img: "/images/home2.jpg" },
-            { label: "Life Groups", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
-            { label: "Youth", size: "", aspect: "aspect-square", img: "/images/hero.jpg" },
-            { label: "DMV Outreach", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
-            { label: "Fellowship", size: "", aspect: "aspect-square", img: "/images/hero.jpg" },
+            { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square", img: "/images/worship.jpeg" },
+            { label: "Life Groups", size: "", aspect: "aspect-square", img: "/images/life-group.jpeg" },
+            { label: "Youth", size: "", aspect: "aspect-square", img: "/images/outreach.jpeg" },
+            { label: "DMV Outreach", size: "", aspect: "aspect-square", img: "/images/outreach.jpeg" },
+            { label: "Fellowship", size: "", aspect: "aspect-square", img: "/images/fellowship.jpg" },
           ].map((item, i) => (
             <div
               key={i}
