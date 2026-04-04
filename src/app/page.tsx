@@ -69,11 +69,26 @@ function SparklesIcon({ className }: { className?: string }) {
   );
 }
 
-function CapitolIcon({ className }: { className?: string }) {
+function MapFoldIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={24} height={24}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3.75a2.25 2.25 0 0 0-2.25 2.25v.75h4.5V6A2.25 2.25 0 0 0 12 3.75Z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 9.75h13.5M6.75 9.75V15m3-5.25V15m3-5.25V15m3-5.25V15m-12 3h13.5M3.75 18h16.5" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9 6.75H7.5a2.25 2.25 0 0 0-2.25 2.25v11.25a2.25 2.25 0 0 0 2.25 2.25h.75m9-13.5H18a2.25 2.25 0 0 1 2.25 2.25v11.25a2.25 2.25 0 0 1-2.25 2.25h-.75m0 0H15M9 6.75v13.5m1.5-13.5v13.5m3-13.5v13.5m-1.5-13.5H9m4.5 0H12m6.75 4.5V9a2.25 2.25 0 0 0-2.25-2.25H15m0 0v13.5m0 0h1.125a2.25 2.25 0 0 0 2.25-2.25V9.75"
+      />
+    </svg>
+  );
+}
+
+function BookOpenIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={24} height={24}>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 0-6-2.292c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25v14.25"
+      />
     </svg>
   );
 }
@@ -471,17 +486,22 @@ function VisitSection() {
               {
                 icon: <ClockIcon className="w-6 h-6 text-primary" />,
                 title: "Service Times",
-                desc: "Sundays at 10:00 AM — Join us for worship, the Word, and fellowship. We'd love to see you there.",
+                desc: "Sundays at 10:00 AM — Join us for worship, the Word, and fellowship—we would love to see you there!",
               },
               {
-                icon: <MapPinIcon className="w-6 h-6 text-primary" />,
-                title: "Location",
-                desc: "Coming soon",
+                icon: <BookOpenIcon className="w-6 h-6 text-primary" />,
+                title: "Life Groups",
+                desc: "Connect beyond Sunday in smaller groups for friendship, prayer, and growing together in Scripture.",
               },
               {
-                icon: <CapitolIcon className="w-6 h-6 text-primary" />,
+                icon: <SparklesIcon className="w-6 h-6 text-primary" />,
+                title: "Worship Nights",
+                desc: "Join us for evenings focused on praise, prayer, and worship as we seek God together.",
+              },
+              {
+                icon: <MapFoldIcon className="w-6 h-6 text-primary" />,
                 title: "DMV Community",
-                desc: "We welcome neighbors from Northern Virginia, DC, and Maryland who are looking for authentic faith and community.",
+                desc: "We welcome neighbors from Northern Virginia, DC, and Maryland—whether you're new to the area, exploring faith, or looking for a church family.",
               },
               {
                 icon: <UsersIcon className="w-6 h-6 text-primary" />,
@@ -768,7 +788,7 @@ function CommunitySection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square", img: "/images/home2.jpg" },
-            { label: "Small Groups", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
+            { label: "Life Groups", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
             { label: "Youth", size: "", aspect: "aspect-square", img: "/images/hero.jpg" },
             { label: "DMV Outreach", size: "", aspect: "aspect-square", img: "/images/home1.jpg" },
             { label: "Fellowship", size: "", aspect: "aspect-square", img: "/images/hero.jpg" },
