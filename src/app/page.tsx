@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, type FormEvent } from "react";
+import { submitNetlifyForm } from "@/lib/netlify-forms";
 
 /* ─────────────── Icon Components ─────────────── */
 
@@ -561,16 +562,28 @@ function PrayerRequestForm() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setErrorMessage("");
+    const trimmed = request.trim();
+    if (!trimmed) {
+      setErrorMessage("Prayer request message is required.");
+      setStatus("error");
+      return;
+    }
+    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setErrorMessage("Please enter a valid email address.");
+      setStatus("error");
+      return;
+    }
     setStatus("submitting");
     try {
-      const res = await fetch("/api/prayer-requests", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, request }),
+      const res = await submitNetlifyForm("prayer-request", {
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        request: trimmed.slice(0, 5000),
+        "bot-field": "",
       });
-      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setErrorMessage(typeof data.error === "string" ? data.error : "Something went wrong.");
+        setErrorMessage("Something went wrong. Please try again.");
         setStatus("error");
         return;
       }
@@ -580,7 +593,7 @@ function PrayerRequestForm() {
       setPhone("");
       setRequest("");
     } catch {
-      setErrorMessage("Could not reach the server. Please try again.");
+      setErrorMessage("Could not send your request. Please try again.");
       setStatus("error");
     }
   }
@@ -608,9 +621,19 @@ function PrayerRequestForm() {
 
   return (
     <form
+      name="prayer-request"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
       onSubmit={handleSubmit}
       className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-left"
     >
+      <input type="hidden" name="form-name" value="prayer-request" />
+      <p className="sr-only">
+        <label>
+          Do not fill this in: <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
       <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center mx-auto sm:mx-0 mb-4">
         <HeartIcon className="w-7 h-7 text-accent-light" />
       </div>
@@ -626,6 +649,7 @@ function PrayerRequestForm() {
           </label>
           <input
             id="prayer-name"
+            name="name"
             type="text"
             autoComplete="name"
             value={name}
@@ -640,6 +664,7 @@ function PrayerRequestForm() {
           </label>
           <input
             id="prayer-email"
+            name="email"
             type="email"
             autoComplete="email"
             value={email}
@@ -654,6 +679,7 @@ function PrayerRequestForm() {
           </label>
           <input
             id="prayer-phone"
+            name="phone"
             type="tel"
             autoComplete="tel"
             value={phone}
@@ -668,6 +694,7 @@ function PrayerRequestForm() {
           </label>
           <textarea
             id="prayer-request"
+            name="request"
             required
             rows={4}
             value={request}
@@ -861,6 +888,143 @@ function ConnectSection() {
   );
 }
 
+/* ─────────────── Contact (footer) ─────────────── */
+
+function ContactForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setErrorMessage("");
+    const em = email.trim();
+    const msg = message.trim();
+    if (!em) {
+      setErrorMessage("Email is required.");
+      setStatus("error");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) {
+      setErrorMessage("Please enter a valid email address.");
+      setStatus("error");
+      return;
+    }
+    if (!msg) {
+      setErrorMessage("Please enter a message.");
+      setStatus("error");
+      return;
+    }
+    setStatus("submitting");
+    try {
+      const res = await submitNetlifyForm("contact", {
+        name: name.trim(),
+        email: em,
+        message: msg.slice(0, 5000),
+        "bot-field": "",
+      });
+      if (!res.ok) {
+        setErrorMessage("Something went wrong. Please try again.");
+        setStatus("error");
+        return;
+      }
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setErrorMessage("Could not send your message. Please try again.");
+      setStatus("error");
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <p className="text-sm text-white/70 leading-relaxed">
+        Thank you — we received your message and will be in touch when we can.
+      </p>
+    );
+  }
+
+  return (
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      onSubmit={handleSubmit}
+      className="space-y-3"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p className="sr-only">
+        <label>
+          Do not fill this in: <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
+      <div>
+        <label htmlFor="contact-name" className="block text-xs font-medium text-white/50 mb-1">
+          Name <span className="text-white/35">(optional)</span>
+        </label>
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          autoComplete="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full rounded-lg bg-white/10 border border-white/15 px-3 py-2 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-accent-light/40"
+          placeholder="Your name"
+        />
+      </div>
+      <div>
+        <label htmlFor="contact-email" className="block text-xs font-medium text-white/50 mb-1">
+          Email <span className="text-accent-light">*</span>
+        </label>
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full rounded-lg bg-white/10 border border-white/15 px-3 py-2 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-accent-light/40"
+          placeholder="you@example.com"
+        />
+      </div>
+      <div>
+        <label htmlFor="contact-message" className="block text-xs font-medium text-white/50 mb-1">
+          Message <span className="text-accent-light">*</span>
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          required
+          rows={3}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="w-full rounded-lg bg-white/10 border border-white/15 px-3 py-2 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-2 focus:ring-accent-light/40 resize-y min-h-[72px]"
+          placeholder="How can we help?"
+        />
+      </div>
+      {errorMessage && (
+        <p className="text-sm text-red-300" role="alert">
+          {errorMessage}
+        </p>
+      )}
+      <button
+        type="submit"
+        disabled={status === "submitting"}
+        className="w-full inline-flex items-center justify-center bg-accent-light text-primary-dark px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {status === "submitting" ? "Sending…" : "Send message"}
+      </button>
+    </form>
+  );
+}
+
 /* ─────────────── Footer ─────────────── */
 
 function Footer() {
@@ -896,6 +1060,7 @@ function Footer() {
                 { label: "Our Vision", href: "#vision" },
                 { label: "Plan Your Visit", href: "#visit" },
                 { label: "Prayer Request", href: "#prayer" },
+                { label: "Contact", href: "#contact" },
                 { label: "Donate", href: "https://paypal.com", external: true },
               ].map((link) => (
                 <li key={link.href}>
@@ -913,11 +1078,11 @@ function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div id="contact">
             <h4 className="font-semibold text-sm uppercase tracking-widest text-white/70 mb-4">
               Contact
             </h4>
-            <div className="space-y-3 text-sm text-white/50">
+            <div className="space-y-3 text-sm text-white/50 mb-5">
               <p className="flex items-center gap-2">
                 <MapPinIcon className="w-4 h-4 shrink-0 text-white/30" />
                 Coming soon
@@ -927,8 +1092,9 @@ function Footer() {
                 Coming soon
               </p>
             </div>
-
-            <p className="text-sm text-white/50 mt-4">Social media — Coming soon</p>
+            <p className="text-xs font-medium text-white/50 mb-3">Send us a message</p>
+            <ContactForm />
+            <p className="text-sm text-white/50 mt-5">Social media — Coming soon</p>
           </div>
         </div>
 
