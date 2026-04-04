@@ -1,3 +1,5 @@
+const NETLIFY_FORMS_PATH = "/__forms.html";
+
 export async function submitNetlifyForm(
   formName: string,
   fields: Record<string, string>
@@ -7,7 +9,7 @@ export async function submitNetlifyForm(
   for (const [key, value] of Object.entries(fields)) {
     params.append(key, value);
   }
-  return fetch("/", {
+  return fetch(NETLIFY_FORMS_PATH, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: params.toString(),

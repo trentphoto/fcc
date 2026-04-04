@@ -622,18 +622,9 @@ function PrayerRequestForm() {
   return (
     <form
       name="prayer-request"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
       onSubmit={handleSubmit}
       className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-left"
     >
-      <input type="hidden" name="form-name" value="prayer-request" />
-      <p className="sr-only">
-        <label>
-          Do not fill this in: <input name="bot-field" tabIndex={-1} autoComplete="off" />
-        </label>
-      </p>
       <div className="w-14 h-14 rounded-full bg-accent-light/20 flex items-center justify-center mx-auto sm:mx-0 mb-4">
         <HeartIcon className="w-7 h-7 text-accent-light" />
       </div>
@@ -949,20 +940,7 @@ function ContactForm() {
   }
 
   return (
-    <form
-      name="contact"
-      method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      onSubmit={handleSubmit}
-      className="space-y-3"
-    >
-      <input type="hidden" name="form-name" value="contact" />
-      <p className="sr-only">
-        <label>
-          Do not fill this in: <input name="bot-field" tabIndex={-1} autoComplete="off" />
-        </label>
-      </p>
+    <form name="contact" onSubmit={handleSubmit} className="space-y-3">
       <div>
         <label htmlFor="contact-name" className="block text-xs font-medium text-white/50 mb-1">
           Name <span className="text-white/35">(optional)</span>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import NetlifyFormsBootstrap from "@/components/NetlifyFormsBootstrap";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,10 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} antialiased`}>
-        <NetlifyFormsBootstrap />
-        {children}
-      </body>
+      <body className={`${geistSans.variable} antialiased`}>{children}</body>
     </html>
   );
 }
