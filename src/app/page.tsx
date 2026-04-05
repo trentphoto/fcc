@@ -2,10 +2,14 @@
 
 import { useState, useEffect, type FormEvent } from "react";
 import { submitNetlifyForm } from "@/lib/netlify-forms";
+import { isSundayLiveServiceWindowEastern } from "@/lib/live-window";
 
 /** Google Form — stay connected (serve, life groups, availability, prayer). */
 const STAY_CONNECTED_FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSdaEes6DcdpgcuX79IVHvtzyikxbTJdbQgU3FkhuJNP8dy5Rg/viewform";
+
+/** Sunday live banner “Join Now” — replace with your Zoom (or stream) URL */
+const LIVE_STREAM_URL = "https://zoom.us";
 
 /* ─────────────── Icon Components ─────────────── */
 
@@ -110,21 +114,21 @@ function MonumentIcon({ className }: { className?: string }) {
 /* ─────────────── Live Banner ─────────────── */
 
 function LiveBanner() {
-  const [liveData, setLiveData] = useState<{ is_live: boolean; zoom_link: string } | null>(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    fetch("/api/live-status")
-      .then((res) => res.json())
-      .then((data) => setLiveData(data))
-      .catch(() => {});
+    const update = () => setShow(isSundayLiveServiceWindowEastern());
+    update();
+    const id = setInterval(update, 60_000);
+    return () => clearInterval(id);
   }, []);
 
-  if (!liveData?.is_live) return null;
+  if (!show) return null;
 
   return (
     <div className="bg-primary-dark text-white text-center text-sm py-2 px-4">
       <a
-        href={liveData.zoom_link || "#"}
+        href={LIVE_STREAM_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 font-medium hover:underline"
@@ -143,7 +147,6 @@ function LiveBanner() {
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const paypalHref = "https://paypal.com";
 
   const links = [
     { label: "Welcome", href: "#welcome" },
@@ -183,14 +186,6 @@ function Navbar() {
               </a>
             ))}
             <a
-              href={paypalHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-primary text-primary px-6 py-3 rounded-full text-base font-semibold hover:bg-primary hover:text-white transition-colors"
-            >
-              Donate
-            </a>
-            <a
               href="#prayer"
               className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-primary-dark transition-colors shadow-sm"
             >
@@ -223,14 +218,6 @@ function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <a
-                href={paypalHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mx-3 mt-2 inline-flex items-center justify-center gap-2 border border-primary text-primary px-5 py-3 rounded-full text-base font-semibold hover:bg-primary hover:text-white transition-colors"
-              >
-                Donate
-              </a>
               <a
                 href="#prayer"
                 onClick={() => setMobileOpen(false)}
@@ -763,37 +750,6 @@ function PrayerSection() {
   );
 }
 
-/* ─────────────── Donate Section ─────────────── */
-
-function DonateSection() {
-  return (
-    <section id="donate" className="py-20 sm:py-28 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl p-8 sm:p-12 border border-accent/20 shadow-sm text-center">
-          <p className="text-primary font-semibold text-sm tracking-widest uppercase mb-3">
-            Give Online
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight">
-            Support the Ministry
-          </h2>
-          <p className="text-text-muted text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-            Your generosity helps us serve our church family and local
-            community. You can give securely through PayPal.
-          </p>
-          <a
-            href="https://paypal.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-full font-semibold hover:bg-primary-dark transition-colors shadow-sm"
-          >
-            Donate with PayPal
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ─────────────── Image Gallery / Community Section ─────────────── */
 
 function CommunitySection() {
@@ -1084,7 +1040,6 @@ function Footer() {
                   href: STAY_CONNECTED_FORM_URL,
                   external: true,
                 },
-                { label: "Donate", href: "https://paypal.com", external: true },
               ].map((link) => (
                 <li key={link.href}>
                   <a
@@ -1144,7 +1099,6 @@ export default function Home() {
       <VisionSection />
       <VisitSection />
       <PrayerSection />
-      <DonateSection />
       <CommunitySection />
       <StayConnectedCtaSection />
       <ConnectSection />
