@@ -8,8 +8,7 @@ import { isSundayLiveServiceWindowEastern } from "@/lib/live-window";
 const STAY_CONNECTED_FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSdaEes6DcdpgcuX79IVHvtzyikxbTJdbQgU3FkhuJNP8dy5Rg/viewform";
 
-/** Sunday live banner “Join Now” — replace with your Zoom (or stream) URL */
-const LIVE_STREAM_URL = "https://zoom.us";
+const LIVE_STREAM_URL = "https://us02web.zoom.us/meeting/register/3wLwju9DTGORSQ3Nzoet6A";
 
 /* ─────────────── Icon Components ─────────────── */
 
