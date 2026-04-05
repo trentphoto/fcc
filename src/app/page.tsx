@@ -770,7 +770,7 @@ function CommunitySection() {
           {[
             { label: "Worship", size: "col-span-2 row-span-2", aspect: "aspect-square", img: "/images/worship.jpeg" },
             { label: "Life Groups", size: "", aspect: "aspect-square", img: "/images/life-group.jpeg" },
-            { label: "Youth", size: "", aspect: "aspect-square", img: "/images/outreach.jpeg" },
+            { label: "Youth", size: "", aspect: "aspect-square", img: "/images/youth.jpg" },
             { label: "DMV Outreach", size: "", aspect: "aspect-square", img: "/images/outreach.jpeg" },
             { label: "Fellowship", size: "", aspect: "aspect-square", img: "/images/fellowship.jpg" },
           ].map((item, i) => (
